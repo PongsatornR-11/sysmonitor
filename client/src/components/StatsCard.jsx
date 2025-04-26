@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getSystemData } from '../api/data';
+import { getSystemBasicData } from '../api/data';
 import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4 } from 'lucide-react'
 
 
@@ -12,7 +12,7 @@ const StatsCard = () => {
     // Fetch data function
     const fetchData = async () => {
         try {
-            const res = await getSystemData();
+            const res = await getSystemBasicData();
             setData(res.data);
             setError(null);
         } catch (err) {
@@ -25,6 +25,7 @@ const StatsCard = () => {
     useEffect(() => {
         fetchData(); // Initial fetch
         const interval = setInterval(fetchData, 2000); // Fetch every 2 second
+        
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
@@ -68,7 +69,7 @@ const StatsCard = () => {
     };
 
     return (
-        <div className="p-6 border rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
+        <div className="p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
             <div className="flex items-center gap-2 text-lg">
                 <Cpu />
                 <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
@@ -97,8 +98,9 @@ const StatsCard = () => {
             </div>
             <div className="flex items-center gap-2 text-lg">
                 <Clock4 />
-                <span>Up-Time : <span className="font-bold">{formatTime(data.uptime.uptime)}</span></span>
+                <span>Up-Time : <span className="font-bold">{formatTime(data.uptime)}</span></span>
             </div>
+            
         </div>
     )
 }
