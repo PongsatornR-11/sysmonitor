@@ -5,7 +5,7 @@ import { getSystemData } from '../api/data'
 const CpuCharts = ({ data }) => {
 
   const fetchData = async () => {
-    
+    const res = 
   }
   return (
     <div className="space-y-6">
