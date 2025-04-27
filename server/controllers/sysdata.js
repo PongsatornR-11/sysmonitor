@@ -139,3 +139,42 @@ exports.getCPUData = async (req, res) => {
         throw error;
     }
 }
+
+exports.getNetworkData = async (req, res) => {
+    try {
+        const [networkInterfaces, networkStats] = await Promise.all([
+            si.networkInterfaces(),
+            si.networkStats()
+        ]);
+
+        const networkData = {
+            interfaces: networkInterfaces.map(n => ({
+                iface: n.iface,
+                ip4: n.ip4,
+                ip6: n.ip6,
+                mac: n.mac,
+                internal: n.internal,
+                virtual: n.virtual,
+                operstate: n.operstate,
+                type: n.type,
+                duplex: n.duplex,
+                mtu: n.mtu,
+                speed: n.speed
+            })),
+            stats: networkStats.map(s => ({
+                iface: s.iface,
+                rx_bytes: s.rx_bytes,
+                tx_bytes: s.tx_bytes,
+                rx_sec: s.rx_sec,
+                tx_sec: s.tx_sec,
+                ms: s.ms
+            }))
+        };
+
+        res.json(networkData);
+    } catch (error) {
+        console.error('Error getting network information:', error);
+        throw error;
+    }
+};
+

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getSystemBasicData } from '../api/data';
-import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4 } from 'lucide-react'
+import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4, Calendar, ClockArrowUp } from 'lucide-react'
 
 
 const StatsCard = () => {
@@ -97,10 +97,17 @@ const StatsCard = () => {
                 <span>IP Address : <span className="font-bold">{data.network.interfaces[1].ip4}</span></span>
             </div>
             <div className="flex items-center gap-2 text-lg">
-                <Clock4 />
+                <ClockArrowUp />
                 <span>Up-Time : <span className="font-bold">{formatTime(data.uptime)}</span></span>
             </div>
-            
+            <div className="flex items-center gap-2 text-lg">
+                <Calendar />
+                <span>Current Date : <span className="font-bold">{new Date().toLocaleDateString()}</span></span>
+            </div>
+            <div className="flex items-center gap-2 text-lg">
+                <Clock4 />
+                <span>Current Time : <span className="font-bold">{new Date().toLocaleTimeString()}</span></span>
+            </div>
         </div>
     )
 }

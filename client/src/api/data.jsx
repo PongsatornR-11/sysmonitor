@@ -13,3 +13,8 @@ export const getSystemBasicData = async() =>{
 export const getCpuData = async() =>{
     return await axios.get(`${API_BASE_URL}/CPU_data`)
 }
+
+
+export const getNetworkData = async() =>{
+    return await axios.get(`${API_BASE_URL}/network_data`)
+}

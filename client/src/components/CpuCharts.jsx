@@ -10,7 +10,6 @@ const CpuCharts = () => {
   const fetchData = async () => {
     try {
       const res = await getCpuData();
-
       // Handle both direct response and response with data property
       const cpuData = res.data
 

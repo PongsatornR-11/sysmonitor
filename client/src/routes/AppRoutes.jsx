@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 //import pages
 import Home from '../pages/Home'
 import CpuStatus from '../pages/CpuStatus'
+import Network from '../pages/Network'
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     {
         path: 'cpu',
         element: <CpuStatus/>
+    },
+    {
+        path: 'network',
+        element: <Network/>
     }
 ])
 
