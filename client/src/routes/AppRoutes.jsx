@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from '../pages/Home'
 import CpuStatus from '../pages/CpuStatus'
 import Network from '../pages/Network'
+import Disk from '../pages/Disk'
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     {
         path: 'network',
         element: <Network/>
+    },
+    {
+        path: 'disk',
+        element: <Disk/>
     }
 ])
 

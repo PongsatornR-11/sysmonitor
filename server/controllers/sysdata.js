@@ -178,3 +178,22 @@ exports.getNetworkData = async (req, res) => {
     }
 };
 
+exports.getDiskData = async (req,res) => {
+    try {
+        const disk = await si.fsSize()
+        const DiskData = {
+            disk: disk.map(d => ({
+                fs: d.fs,
+                size: d.size,
+                used: d.used,
+                available: d.available,
+                usedPercentage: d.use,
+                mount: d.mount
+            }))
+        }
+        res.json(DiskData)
+    }catch (err) {
+        console.error('Error getting Disk information', error);
+        throw error;
+    }
+}

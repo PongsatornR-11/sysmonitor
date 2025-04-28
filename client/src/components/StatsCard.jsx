@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getSystemBasicData } from '../api/data';
 import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4, Calendar, ClockArrowUp } from 'lucide-react'
-
+import { Link } from 'react-router-dom'
 
 const StatsCard = () => {
 
@@ -24,7 +24,7 @@ const StatsCard = () => {
 
     useEffect(() => {
         fetchData(); // Initial fetch
-        const interval = setInterval(fetchData, 2000); // Fetch every 2 second
+        const interval = setInterval(fetchData, 1000); // Fetch every 2 second
         
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
@@ -70,33 +70,34 @@ const StatsCard = () => {
 
     return (
         <div className="p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
-            <div className="flex items-center gap-2 text-lg">
+            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
                 <Cpu />
                 <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
             </div>
-            <div className="flex items-center gap-2 text-lg">
+
+            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
                 <Thermometer />
                 <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
             </div>
-            <div className="flex items-center gap-2 text-lg">
+            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
                 <MemoryStick />
                 <span>Memory Used : <span className="font-bold">{formatBytes(data.memory.used)} / {formatBytes(data.memory.total)}</span></span>
             </div>
 
 
-            <div className="flex items-center gap-2 text-lg">
+            <Link to='/disk' className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
                 <HardDrive />
                 <span>
                     Disk Used :
                     <span className="font-bold"> {formatBytes(data.disk[0].used)} / {formatBytes(data.disk[0].size)} </span>
                 </span>
-            </div>
+            </Link>
 
-            <div className="flex items-center gap-2 text-lg">
+            <Link to='/network' className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
                 <Network />
                 <span>IP Address : <span className="font-bold">{data.network.interfaces[1].ip4}</span></span>
-            </div>
-            <div className="flex items-center gap-2 text-lg">
+            </Link>
+            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
                 <ClockArrowUp />
                 <span>Up-Time : <span className="font-bold">{formatTime(data.uptime)}</span></span>
             </div>

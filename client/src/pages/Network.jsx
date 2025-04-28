@@ -3,7 +3,7 @@ import NetworkDetail from '../components/network/networkDetail'
 
 const Network = () => {
   return (
-    <div className="min-h-screen p-6 font-mono"><NetworkDetail/></div>
+    <div className="min-h-screen"><NetworkDetail/></div>
   )
 }
 

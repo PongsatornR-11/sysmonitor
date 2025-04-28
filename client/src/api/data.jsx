@@ -18,3 +18,6 @@ export const getCpuData = async() =>{
 export const getNetworkData = async() =>{
     return await axios.get(`${API_BASE_URL}/network_data`)
 }
+export const getDiskData = async() =>{
+    return await axios.get(`${API_BASE_URL}/disk_data`)
+}

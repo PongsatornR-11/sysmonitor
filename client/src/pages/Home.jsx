@@ -8,7 +8,7 @@ import CpuCharts from '../components/CpuCharts';
 export default function Home() {
 
   return (
-    <div className="min-h-screen p-6 font-mono">
+    <div className="min-h-screen font-mono">
       {/* Header */}
       <div className="flex items-center justify-center mb-6">
         <FaRaspberryPi className="text-5xl font-bold mr-3" />
