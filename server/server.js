@@ -7,19 +7,22 @@ const fs = require('fs').promises;
 const app = express();
 const port = 3001;
 
+app.use(cors());
 // Configure CORS with specific options
-app.use(cors({
-    origin: ['http://localhost:5173', 'https://sysmonitor.mypiserviceshub.com'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+//     origin: ['http://localhost:5173', 'https://sysmonitor.mypiserviceshub.com'],
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// }));
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
 app.use(morgan('dev'));
 
-readdirSync('./routes').map((c) => app.use('/api', require('./routes/' + c)));
+readdirSync('./routes').map((file) => 
+    app.use('/api', require('./routes/' + file))
+);
 
 // app.get('/api/data', (req, res) => {
 
