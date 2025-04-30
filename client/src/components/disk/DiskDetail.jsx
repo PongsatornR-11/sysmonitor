@@ -49,6 +49,25 @@ const DiskDetail = () => {
         );
     }
 
+    const calProgressBar = (data) => {
+        const result = '#'.repeat(Math.round(data / 2))
+        return result
+    }
+    const progressBar = (data) => {
+        let color = 'text-green-400'; // default
+
+        if (data <= 30) {
+            color = 'text-green-400';
+        } else if (data <= 50) {
+            color = 'text-yellow-400';
+        } else if (data <= 75) {
+            color = 'text-orange-400';
+        } else {
+            color = 'text-red-400';
+        }
+        return <span className={`${color} flex justify-items-start`}>:{calProgressBar(data)}</span>;
+    }
+
     const convertDataSize = (data) =>{
         return `${(data/(1024 * 1024 * 1024)).toFixed(2)} GB`
     }
@@ -59,17 +78,17 @@ const DiskDetail = () => {
                 <h1 className="text-2xl font-bold mt-8 mb-4">Disk Stats</h1>
                 {data.disk.map((disk) => {
                     return (
-                        <div className='border rounded-2xl mb-4 py-4'>
+                        <div className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
                             <div>Disk name: {disk.fs}</div>
                             <div>Disk path: {disk.mount}</div>
                             <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div> 
                             <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
                             <div>Disk Used:<span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>
+                            {progressBar(disk.usedPercentage.toFixed(2))}
                         </div>
                     )
                 })
                 }
-
             </div>
         </div>
     )

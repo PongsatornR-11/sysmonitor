@@ -25,7 +25,7 @@ const StatsCard = () => {
     useEffect(() => {
         fetchData(); // Initial fetch
         const interval = setInterval(fetchData, 1000); // Fetch every 2 second
-        
+
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
@@ -70,22 +70,27 @@ const StatsCard = () => {
 
     return (
         <div className="p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
-            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
-                <Cpu />
-                <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
-            </div>
+            <Link to='/cpu' className='items-center gap-2 hover:text-blue-500 duration-200'>
 
-            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
-                <Thermometer />
-                <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
-            </div>
-            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
+                <div className="flex items-center gap-2 rounded-2xl text-lg mb-2">
+                    <Cpu />
+                    <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-2xl text-lg ">
+                    <Thermometer />
+                    <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
+                </div>
+            </Link>
+
+
+            <div className="flex items-center gap-2 rounded-2xl text-lg ">
                 <MemoryStick />
                 <span>Memory Used : <span className="font-bold">{formatBytes(data.memory.used)} / {formatBytes(data.memory.total)}</span></span>
             </div>
 
 
-            <Link to='/disk' className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
+            <Link to='/disk' className="flex items-center gap-2 rounded-2xl text-lg hover:text-blue-500 duration-200">
                 <HardDrive />
                 <span>
                     Disk Used :
@@ -93,11 +98,11 @@ const StatsCard = () => {
                 </span>
             </Link>
 
-            <Link to='/network' className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
+            <Link to='/network' className="flex items-center gap-2 rounded-2xl text-lg hover:text-blue-500 duration-200">
                 <Network />
                 <span>IP Address : <span className="font-bold">{data.network.interfaces[1].ip4}</span></span>
             </Link>
-            <div className="flex items-center gap-2 hover:border rounded-2xl hover:p-2 text-lg transition-transform duration-500">
+            <div className="flex items-center gap-2 rounded-2xl text-lg ">
                 <ClockArrowUp />
                 <span>Up-Time : <span className="font-bold">{formatTime(data.uptime)}</span></span>
             </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import AppRoutes from './routes/AppRoutes'
 import { ThemeProvider } from './context/ThemeContext'
 import ThemeToggle from './components/ThemeToggle'
+import LinkButton from './components/button/LinkButton'
 import './App.css'
 
 function App() {

@@ -1,8 +1,9 @@
 import React from 'react'
+import CpuStat from '../components/cpu/CpuStat'
 
 const CpuStatus = () => {
   return (
-    <div>CpuStatus</div>
+    <div><CpuStat/></div>
   )
 }
 

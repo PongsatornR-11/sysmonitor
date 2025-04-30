@@ -1,6 +1,8 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+import Layout from '../layouts/Layout'
+
 //import pages
 import Home from '../pages/Home'
 import CpuStatus from '../pages/CpuStatus'
@@ -10,19 +12,13 @@ import Disk from '../pages/Disk'
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home />
-    },
-    {
-        path: 'cpu',
-        element: <CpuStatus/>
-    },
-    {
-        path: 'network',
-        element: <Network/>
-    },
-    {
-        path: 'disk',
-        element: <Disk/>
+        element: <Layout />,
+        children: [
+            { index: true, element: <Home /> },
+            { path: 'cpu', element: <CpuStatus /> },
+            { path: 'network', element: <Network /> },
+            { path: 'disk', element: <Disk /> },
+        ]
     }
 ])
 
