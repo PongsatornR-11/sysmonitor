@@ -197,3 +197,23 @@ exports.getDiskData = async (req,res) => {
         throw error;
     }
 }
+
+exports.getNetworkConnections = async (req,res) => {
+    try{
+        const connections = await si.networkConnections()
+        res.json({
+            connections: connections.map((connection)=>({
+                protocol: connection.protocol,
+                localAddress: connection.localAddress,
+                localPort: connection.localPort,
+                peerAddress: connection.peerAddress,
+                peerPort: connection.peerPort,
+                pid: connection.pid,
+                processName: connection.process
+            }))
+        })
+    }catch (err) {
+        console.error('Error getting Network Connections', error)
+        throw error;
+    }
+}
