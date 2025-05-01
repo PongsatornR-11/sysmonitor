@@ -5,6 +5,7 @@ import { FaRaspberryPi } from 'react-icons/fa';
 import { ChartLine } from 'lucide-react';
 import StatsCard from '../components/StatsCard';
 import CpuCharts from '../components/CpuCharts';
+import ServicesHub from '../components/ServicesHub';
 
 export default function Home() {
 
@@ -14,7 +15,7 @@ export default function Home() {
         <title>Sysmonitor - Home</title>
         <link rel="icon" type="image/png" href="assets/house.png" />
       </Helmet>
-      <div className="min-h-screen font-mono">
+      <div className="select-none min-h-screen font-mono">
         {/* Header */}
         <div className="flex items-center justify-center mb-6">
           <FaRaspberryPi className="text-5xl font-bold mr-3" />
@@ -23,6 +24,7 @@ export default function Home() {
 
         <StatsCard />
 
+        <ServicesHub/>
         {/* Live Stats Section */}
         <div className="p-6 rounded-2xl shadow-md max-w-4xl mx-auto border-2">
           <div className="flex items-center gap-2 mb-2">

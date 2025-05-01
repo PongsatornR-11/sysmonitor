@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getCpuData } from '../../api/data'
 import { Thermometer, Cpu } from 'lucide-react'
 import CpuCharts from '../CpuCharts';
+import ProgressBar from '../utils/ProgressBar';
 
 const CpuStat = () => {
 
@@ -25,7 +26,6 @@ const CpuStat = () => {
     useEffect(() => {
         fetchData(); // Initial fetch
         const interval = setInterval(fetchData, 2000); // Fetch every 2 second
-
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
@@ -52,24 +52,7 @@ const CpuStat = () => {
             </div>
         );
     }
-    const calProgressBar = (data) => {
-        const result = '#'.repeat(Math.round(data / 2))
-        return result
-    }
-    const progressBar = (data) => {
-        let color = 'text-green-400'; // default
-
-        if (data <= 30) {
-            color = 'text-green-400';
-        } else if (data <= 50) {
-            color = 'text-yellow-400';
-        } else if (data <= 75) {
-            color = 'text-orange-400';
-        } else {
-            color = 'text-red-400';
-        }
-        return <span className={`${color} flex justify-items-start`}>:{calProgressBar(data)}</span>;
-    }
+    
     return (
         <div className="min-h-screen">
             <div className="flex items-center justify-center mb-6">
@@ -82,8 +65,7 @@ const CpuStat = () => {
                         <Cpu />
                         <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
                     </div>
-                    {/* <span className=' flex justify-items-start'>:{calProgressBar(data.cpu.load)}</span> */}
-                    {progressBar(data.cpu.load)}
+                    <ProgressBar percent={data.cpu.load.toFixed(2)}/>
                 </div>
 
                 <div className="items-center gap-2 rounded-2xl text-lg ">
@@ -91,7 +73,7 @@ const CpuStat = () => {
                     <Thermometer />
                     <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
                     </div>
-                    {progressBar(data.cpu.temperature)}
+                    <ProgressBar percent={data.cpu.temperature}/>
                 </div>
             </div>
             <div className="p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
@@ -101,7 +83,7 @@ const CpuStat = () => {
                             <div>
                                 <div key={index} className="items-center rounded-2xl text-lg gap-2">
                                     <span className='flex gap-2 '><Cpu />Load core {index} :<span className='font-bold'> {core.load.toFixed(2)} %</span> </span>
-                                    {progressBar(data.cpu.load)}
+                                    <ProgressBar percent={core.load.toFixed(2)}/>
                                 </div>
                             </div>
                         )

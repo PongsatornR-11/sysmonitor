@@ -18,7 +18,7 @@ app.use(cors());
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
 readdirSync('./routes').map((file) => 
     app.use('/api', require('./routes/' + file))
