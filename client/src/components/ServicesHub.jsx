@@ -44,7 +44,7 @@ const ServicesHub = () => {
                             <span className='flex h-[100%] items-center'>q Bittorrent (local)</span>
                         </a>
                     </div>
-                    <button type='button' className='border p-1 rounded-md cursor-pointer hover:scale-105 duration-200 mt-4' onClick={() => { setStatus(null) }}>Hind services?</button>
+                    <button type='button' className='border p-1 rounded-md cursor-pointer hover:scale-105 duration-200 mt-4' onClick={() => { setStatus(null) }}> Hide services </button>
                 </div>)
                 :
                 status == null

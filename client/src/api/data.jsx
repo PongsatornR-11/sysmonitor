@@ -25,3 +25,7 @@ export const getDiskData = async() =>{
 export const getConnectionData = async() => {
     return await axios.get(`${API_BASE_URL}/connect_data`)
 }
+
+export const getMemoryData = async() => {
+    return await axios.get(`${API_BASE_URL}/mem_data`)
+}

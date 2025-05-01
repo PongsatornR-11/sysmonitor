@@ -217,3 +217,39 @@ exports.getNetworkConnections = async (req,res) => {
         throw error;
     }
 }
+
+exports.getMemoryData = async (req,res) => {
+    try {
+        const memory = await si.mem()
+        const memLayouts = await si.memLayout()
+
+        const actualUsedMemory = memory.total - memory.free - memory.cached - memory.buffers;
+        const MemoryData = {
+            memory: {
+                total: memory.total,
+                used: memory.used,
+                actualUsedMemory: actualUsedMemory,
+                actualusedPercentage: (actualUsedMemory / memory.total) * 100,
+                free: memory.free,
+                available: memory.available,
+                usedPercentage: (memory.used / memory.total) * 100,
+                cached: memory.cached,
+                buffers: memory.buffers
+            },
+            memoryLayout: memLayouts.map((layout) => ({
+                size: layout.size,
+                bank: layout.bank,
+                type: layout.type,
+                clockSpeed: layout.clockSpeed,
+                manufacturer: layout.manufacturer,
+                voltageMin: layout.voltageMin,
+                voltageMax: layout.voltageMax,
+                voltageConfigured: layout.voltageConfigured
+            }))
+        }
+        res.json(MemoryData)
+    }catch (err) {
+        console.error('Error getting Memory information', error);
+        throw error;
+    }
+}

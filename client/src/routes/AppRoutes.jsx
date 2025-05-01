@@ -8,7 +8,7 @@ import Home from '../pages/Home'
 import CpuStatus from '../pages/CpuStatus'
 import Network from '../pages/Network'
 import Disk from '../pages/Disk'
-import Momory from '../pages/Momory'
+import Memory from '../pages/Memory'
 
 const router = createBrowserRouter([
     {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
             { path: 'cpu', element: <CpuStatus /> },
             { path: 'network', element: <Network /> },
             { path: 'disk', element: <Disk /> },
-            { path: 'memory', element: <Momory /> },
+            { path: 'memory', element: <Memory /> },
         ]
     }
 ])

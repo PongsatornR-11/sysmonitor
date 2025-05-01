@@ -102,7 +102,7 @@ const StatsCard = () => {
 
                     <HardDrive />
                     <span>
-                        Main Disk Used :
+                        OS Disk Used :
                         <span className="font-bold"> {formatBytes(data.disk[0].used)} / {formatBytes(data.disk[0].size)} </span>
                     </span>
                 </div>

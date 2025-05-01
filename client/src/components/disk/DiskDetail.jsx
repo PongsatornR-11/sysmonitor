@@ -55,7 +55,7 @@ const DiskDetail = () => {
     }
     return (
         <div>
-            <div className="text-lg rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
+            <div className="text-lg rounded-2xl flex flex-col gap-2 max-w-xl mx-auto mb-8">
 
                 <h1 className="text-2xl font-bold mt-8 mb-4">Disk Stats</h1>
                 {data.disk.map((disk) => {
