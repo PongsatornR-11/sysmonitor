@@ -87,13 +87,13 @@ const StatsCard = () => {
                 <ProgressBar percent={data.cpu.temperature.toFixed(2)} />
             </Link>
 
-            <div className='gap-2 text-lg '>
+            <Link to='/memory' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
                 <div className="flex items-center gap-2">
                     <MemoryStick />
                     <span>Memory Used : <span className="font-bold">{formatBytes(data.memory.used)} / {formatBytes(data.memory.total)}</span></span>
                 </div>
                 <ProgressBar percent={((data.memory.used / data.memory.total) * 100).toFixed(2)} />
-            </div>
+            </Link>
 
 
 

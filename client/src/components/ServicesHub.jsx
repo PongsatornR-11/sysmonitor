@@ -6,8 +6,7 @@ const ServicesHub = () => {
     const [input, setInput] = useState('')
     const [status, setStatus] = useState(null)
 
-    const correctPassword = "ginv'dlbdiIN"
-
+    const correctPassword = import.meta.env.VITE_APP_PASSWORD
     const handleSubmit = (e) => {
         e.preventDefault();
         if (input === correctPassword) {
@@ -23,14 +22,14 @@ const ServicesHub = () => {
             {status == true
                 ?
                 (<div>
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-4 gap-4">
                         <a target='_blank' href='https://code.mypiserviceshub.com/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
                             <Code className=' h-[100%]' />
                             <span className='flex h-[100%] items-center'> Code - server</span>
                         </a>
                         <a target='_blank' href='https://file.mypiserviceshub.com/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
                             <FolderKey className=' h-[100%]' />
-                            <span className='flex h-[100%]  items-center'>File -Browser</span>
+                            <span className='flex h-[100%]  items-center'>File - Browser</span>
                         </a>
                         <a target='_blank' href='https://vault.mypiserviceshub.com/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
                             <HardDriveDownload className=' h-[100%]' />
@@ -42,7 +41,7 @@ const ServicesHub = () => {
                         </a>
                         <a target='_blank' href='http://192.168.1.63:8080/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
                             <CloudDownload className=' h-[100%]' />
-                            <span className='flex h-[100%] items-center'>q -Bittorrent (local)</span>
+                            <span className='flex h-[100%] items-center'>q Bittorrent (local)</span>
                         </a>
                     </div>
                     <button type='button' className='border p-1 rounded-md cursor-pointer hover:scale-105 duration-200 mt-4' onClick={() => { setStatus(null) }}>Hind services?</button>
