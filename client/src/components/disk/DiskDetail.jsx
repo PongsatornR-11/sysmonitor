@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getDiskData } from '../../api/data';
 import ProgressBar from '../utils/ProgressBar';
+import CopyTextBox from '../utils/CopyTextBox';
 
 const DiskDetail = () => {
 
@@ -71,22 +72,24 @@ const DiskDetail = () => {
                             // </a>
                             <div target="_blank" className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
                                 <div>Disk name: {disk.fs}</div>
-                                <div>Disk path: {disk.mount}</div>
+                                <div>Disk path:
+                                    <CopyTextBox textToCopy={disk.mount} />
+                                </div>
                                 <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div>
                                 <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
                                 <div>Disk Used: <span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>
-                                <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'}/>
+                                <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'} />
                             </div>
                         )
                     }
                     return (
                         <div className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
                             <div>Disk name: {disk.fs}</div>
-                            <div>Disk path: {disk.mount}</div>
+                            <div>Disk path: <CopyTextBox textToCopy={disk.mount}/></div>
                             <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div>
                             <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
                             <div>Disk Used: <span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>
-                            <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'} fill='#'/>
+                            <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'} fill='#' />
                         </div>
                     )
                 })
