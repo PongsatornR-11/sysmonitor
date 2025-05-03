@@ -61,14 +61,22 @@ const DiskDetail = () => {
                 {data.disk.map((disk) => {
                     if (disk.fs == '/dev/sdb1') {
                         return (
-                            <a href='https://file.mypiserviceshub.com' target="_blank" className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
+                            // <a href='https://file.mypiserviceshub.com' target="_blank" className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
+                            //     <div>Disk name: {disk.fs}</div>
+                            //     <div>Disk path: {disk.mount}</div>
+                            //     <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div>
+                            //     <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
+                            //     <div>Disk Used: <span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>
+                            //     <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'}/>
+                            // </a>
+                            <div target="_blank" className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
                                 <div>Disk name: {disk.fs}</div>
                                 <div>Disk path: {disk.mount}</div>
                                 <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div>
                                 <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
                                 <div>Disk Used: <span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>
-                                <ProgressBar percent={disk.usedPercentage.toFixed(2)} />
-                            </a>
+                                <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'}/>
+                            </div>
                         )
                     }
                     return (
@@ -78,7 +86,7 @@ const DiskDetail = () => {
                             <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div>
                             <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
                             <div>Disk Used: <span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>
-                            <ProgressBar percent={disk.usedPercentage.toFixed(2)} />
+                            <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'} fill='#'/>
                         </div>
                     )
                 })

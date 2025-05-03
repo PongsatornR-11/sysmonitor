@@ -17,7 +17,7 @@ const ServicesHub = () => {
         setInput('')
     }
     return (
-        <div className='m-6 p-4 border-2 rounded-2xl mb-8'>
+        <div className='m-6 p-4 border-2 rounded-2xl max-w-2xl mx-auto mb-8'>
             <h1 className='p-2 mb-2 text-xl font-bold'>My Pi Services</h1>
             {status == true
                 ?

@@ -65,7 +65,7 @@ const MemoryCard = () => {
         <p className="text-xl font-semibold ">Total Memory: {formatBytes(data.memory.total)}</p>
         <p className="text-xl font-semibold ">Free Memory: {formatBytes(data.memory.available)}</p>
         <p className="text-xl font-semibold ">Memory Usage: {data.memory.actualusedPercentage.toFixed(2)}%</p>
-        <ProgressBar percent={data.memory.actualusedPercentage.toFixed(2)}/>
+        <ProgressBar percent={data.memory.actualusedPercentage.toFixed(2)} suffix={'%'}/>
         <p className="text-xl font-semibold ">Memory Speed: {data.memoryLayout[0].clockSpeed} MHz</p>
       </div>
 
@@ -74,7 +74,7 @@ const MemoryCard = () => {
         <p className="text-xl font-semibold ">Config Voltage: {data.memoryLayout[0].voltageConfigured} V</p>
         <p className="text-xl font-semibold ">Max Voltage: {data.memoryLayout[0].voltageMax} V</p>
         <p className="text-xl font-semibold ">Min Voltage: {data.memoryLayout[0].voltageMin} V</p>
-        <ProgressBar percent={data.memoryLayout[0].voltageMax / data.memoryLayout[0].voltageMin * 100}/>
+        <ProgressBar percent={(data.memoryLayout[0].voltageMax / data.memoryLayout[0].voltageMin * 100).toFixed(2)} suffix={'%'}/>
       </div>
     </div>
   )

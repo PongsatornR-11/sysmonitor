@@ -76,15 +76,15 @@ const StatsCard = () => {
             <Link to='/cpu' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
                 <div className="flex items-center gap-2  mb-2">
                     <Cpu />
-                    <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
+                    <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)} %</span></span>
                 </div>
-                <ProgressBar percent={data.cpu.load.toFixed(2)} />
+                <ProgressBar percent={data.cpu.load.toFixed(2)} suffix={'%'} />
 
                 <div className="flex items-center gap-2 ">
                     <Thermometer />
                     <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
                 </div>
-                <ProgressBar percent={data.cpu.temperature.toFixed(2)} />
+                <ProgressBar percent={data.cpu.temperature.toFixed(2)} suffix={'°C'}/>
             </Link>
 
             <Link to='/memory' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
@@ -92,7 +92,7 @@ const StatsCard = () => {
                     <MemoryStick />
                     <span>Memory Used : <span className="font-bold">{formatBytes(data.memory.used)} / {formatBytes(data.memory.total)}</span></span>
                 </div>
-                <ProgressBar percent={((data.memory.used / data.memory.total) * 100).toFixed(2)} />
+                <ProgressBar percent={((data.memory.used / data.memory.total) * 100).toFixed(2)} suffix={'%'}/>
             </Link>
 
 
@@ -106,7 +106,7 @@ const StatsCard = () => {
                         <span className="font-bold"> {formatBytes(data.disk[0].used)} / {formatBytes(data.disk[0].size)} </span>
                     </span>
                 </div>
-                <ProgressBar percent={(((data.disk[0].used) / data.disk[0].size) * 100).toFixed(2)} />
+                <ProgressBar percent={(((data.disk[0].used) / data.disk[0].size) * 100).toFixed(2)} suffix={'%'} />
 
             </Link>
 
