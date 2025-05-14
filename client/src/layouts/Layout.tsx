@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <div>
       <LinkButton to="/" name="Home Page" className={"home-page text-xs z-40 "} />
-      <main >
+      <main  className="font-mono">
         <Outlet />
       </main>
     </div>

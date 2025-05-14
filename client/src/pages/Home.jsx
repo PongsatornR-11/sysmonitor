@@ -15,6 +15,7 @@ export default function Home() {
         <title>Sysmonitor - Home</title>
         <link rel="icon" type="image/png" href="assets/house.png" />
       </Helmet>
+      
       <div className="select-none min-h-screen font-mono">
         {/* Header */}
         <div className="flex justify-center mb-6">

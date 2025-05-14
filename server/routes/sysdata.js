@@ -1,6 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const { getSystemData, getBasicSystemData, getCPUData, getNetworkData, getDiskData, getNetworkConnections, getMemoryData} = require('../controllers/sysdata')
+const {
+    getSystemData,
+    getBasicSystemData,
+    getCPUData,
+    getNetworkData,
+    getDiskData,
+    getServicesData,
+    getNetworkConnections,
+    getMemoryData
+} = require('../controllers/sysdata')
 
 
 router.get('/sys_data', getSystemData)
@@ -10,5 +19,6 @@ router.get('/network_data', getNetworkData)
 router.get('/disk_data', getDiskData)
 router.get('/connect_data', getNetworkConnections)
 router.get('/mem_data', getMemoryData)
+router.get('/service_data', getServicesData)
 
 module.exports = router

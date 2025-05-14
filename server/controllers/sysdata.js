@@ -132,11 +132,37 @@ exports.getCPUData = async (req, res) => {
                 load: cpuLoad.currentLoad,
                 temperature: cpuTemp.main,
                 cores: cpuLoad.cpus
-            },}
+            },
+        }
         res.json(CPUData)
     } catch (err) {
         console.error('Error getting CPU information', error);
         throw error;
+    }
+}
+
+exports.getServicesData = async (req, res) => {
+    try {
+        const services = await si.services('*')
+        res.json({
+            services: services.map(service => ({
+                name: service.name,
+                running: service.running,
+                pids: service.pids.map((pid, index) => {
+                    return ({
+                        [index]: pid
+                    }
+                    )
+                }),
+                cpu: service.cpu,
+            }))
+        })
+    } catch (error) {
+        console.log('Error getting service information', error)
+        res.status(500).json({
+            message: 'Failed to get service information',
+            error: error
+        })
     }
 }
 
@@ -178,7 +204,7 @@ exports.getNetworkData = async (req, res) => {
     }
 };
 
-exports.getDiskData = async (req,res) => {
+exports.getDiskData = async (req, res) => {
     try {
         const disk = await si.fsSize()
         const DiskData = {
@@ -192,17 +218,17 @@ exports.getDiskData = async (req,res) => {
             }))
         }
         res.json(DiskData)
-    }catch (err) {
+    } catch (err) {
         console.error('Error getting Disk information', error);
         throw error;
     }
 }
 
-exports.getNetworkConnections = async (req,res) => {
-    try{
+exports.getNetworkConnections = async (req, res) => {
+    try {
         const connections = await si.networkConnections()
         res.json({
-            connections: connections.map((connection)=>({
+            connections: connections.map((connection) => ({
                 protocol: connection.protocol,
                 localAddress: connection.localAddress,
                 localPort: connection.localPort,
@@ -212,13 +238,13 @@ exports.getNetworkConnections = async (req,res) => {
                 processName: connection.process
             }))
         })
-    }catch (err) {
+    } catch (err) {
         console.error('Error getting Network Connections', error)
         throw error;
     }
 }
 
-exports.getMemoryData = async (req,res) => {
+exports.getMemoryData = async (req, res) => {
     try {
         const memory = await si.mem()
         const memLayouts = await si.memLayout()
@@ -248,7 +274,7 @@ exports.getMemoryData = async (req,res) => {
             }))
         }
         res.json(MemoryData)
-    }catch (err) {
+    } catch (err) {
         console.error('Error getting Memory information', error);
         throw error;
     }

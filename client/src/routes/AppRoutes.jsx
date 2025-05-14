@@ -9,6 +9,7 @@ import CpuStatus from '../pages/CpuStatus'
 import Network from '../pages/Network'
 import Disk from '../pages/Disk'
 import Memory from '../pages/Memory'
+import Playground from '../pages/Playground'
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             { path: 'disk', element: <Disk /> },
             { path: 'memory', element: <Memory /> },
         ]
+    },
+    {
+        path: '/playground',
+        element: <Playground />
     }
 ])
 

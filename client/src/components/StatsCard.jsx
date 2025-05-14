@@ -71,7 +71,7 @@ const StatsCard = () => {
     };
 
     return (
-        <div className="select-none p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8 overflow-auto">
+        <div className="select-none p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mx-auto w-fit mb-8 overflow-auto">
 
             <Link to='/cpu' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
                 <div className="flex items-center gap-2  mb-2">

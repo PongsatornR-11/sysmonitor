@@ -29,3 +29,7 @@ export const getConnectionData = async() => {
 export const getMemoryData = async() => {
     return await axios.get(`${API_BASE_URL}/mem_data`)
 }
+
+export const getServicesData = async() =>{
+    return await axios.get(`${API_BASE_URL}/service_data`)
+}
