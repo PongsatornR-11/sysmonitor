@@ -79,11 +79,19 @@ The application will be available at `http://localhost:3000`
 ```
 sysmonitor/
 ├── client/                 # Frontend React application
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── node_modules/
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public/
+│   ├── README.md
 │   ├── src/
 │   │   ├── components/     # React components
 │   │   ├── api/           # API integration
 │   │   └── App.jsx        # Main application component
-│   └── package.json
+│   └── vite.config.js
 ├── server/                 # Backend Node.js application
 │   ├── src/
 │   │   ├── routes/        # API routes

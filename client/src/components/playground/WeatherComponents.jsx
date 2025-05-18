@@ -1,5 +1,5 @@
 import React from 'react'
-import { MapPin, CloudSunRain, Wind, Droplet, Sunrise } from 'lucide-react';
+import { MapPin, CloudSunRain, Wind, Droplet, Sunrise, Sunset } from 'lucide-react';
 
 export const CurrentWeatherCard = () => {
     return (
@@ -47,7 +47,7 @@ export const TodayHighlightCard = () => {
                     <div className='flex gap-2'>
 
                         <div className='border rounded-xl w-1/4'>
-                            <div className='flex gap-2 justify-end'>
+                            <div className='flex gap-2 justify-end p-2'>
                                 <Wind />
                                 <p>Wind Status</p>
                             </div>
@@ -82,7 +82,6 @@ export const TodayHighlightCard = () => {
 
                     </div>
 
-
                     <div className='flex gap-2'>
 
                         <div className='border rounded-xl w-1/4'>
@@ -112,7 +111,7 @@ export const TodayHighlightCard = () => {
                             </div>
                         </div>
                         <div className='border rounded-xl w-2/4'>
-                            <Sunrise />
+                            <Sunset />
                             <div>
                                 <p>Sunrise</p>
                                 <p>4:30 AM</p>
