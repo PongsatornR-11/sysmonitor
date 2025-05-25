@@ -3,7 +3,7 @@ import CpuStat from '../components/cpu/CpuStat'
 import ServiceDetail from '../components/cpu/ServiceDetail'
 const CpuStatus = () => {
   return (
-    <div>
+    <div className='w-4xl mx-auto'>
       <CpuStat />
       <ServiceDetail />
     </div>

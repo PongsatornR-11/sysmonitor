@@ -40,7 +40,7 @@ const CpuCharts = () => {
   useEffect(() => {
     fetchData(); // Initial fetch
     const interval = setInterval(fetchData, 5000); // Fetch every 5 seconds
-    
+
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
@@ -69,7 +69,7 @@ const CpuCharts = () => {
   }
 
   return (
-    <div className="space-y-6 p-4">
+    <div className="space-y-6 w-2xl p-4">
       {/* CPU Load Chart */}
       <div className="rounded-lg shadow">
         <h3 className="text-lg font-semibold mb-4">Overall CPU Load (%)</h3>

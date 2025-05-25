@@ -52,9 +52,9 @@ const CpuStat = () => {
             </div>
         );
     }
-    
+
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen w-fit mx-auto">
             <div className="flex items-center justify-center mb-6">
                 <h1 className="text-2xl font-extrabold tracking-tight">CPU Status</h1>
             </div>
@@ -65,15 +65,15 @@ const CpuStat = () => {
                         <Cpu />
                         <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
                     </div>
-                    <ProgressBar percent={data.cpu.load.toFixed(2)} suffix={'%'}/>
+                    <ProgressBar percent={data.cpu.load.toFixed(2)} suffix={'%'} />
                 </div>
 
                 <div className="items-center gap-2 rounded-2xl text-lg ">
                     <div className='flex gap-2'>
-                    <Thermometer />
-                    <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
+                        <Thermometer />
+                        <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
                     </div>
-                    <ProgressBar percent={data.cpu.temperature} suffix={'%'}/>
+                    <ProgressBar percent={data.cpu.temperature} suffix={'°C'} />
                 </div>
             </div>
             <div className="p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
@@ -83,7 +83,7 @@ const CpuStat = () => {
                             <div>
                                 <div key={index} className="items-center rounded-2xl text-lg gap-2">
                                     <span className='flex gap-2 '><Cpu />Load core {index} :<span className='font-bold'> {core.load.toFixed(2)} %</span> </span>
-                                    <ProgressBar percent={core.load.toFixed(2)} suffix={'%'}/>
+                                    <ProgressBar percent={core.load.toFixed(2)} suffix={'%'} />
                                 </div>
                             </div>
                         )
@@ -91,8 +91,10 @@ const CpuStat = () => {
                 }
 
             </div>
-            
-            <CpuCharts/>
+
+            <div className='border-2 rounded-2xl mx-auto w-fit p-2 mb-4'>
+                <CpuCharts />
+            </div>
 
         </div>
     )

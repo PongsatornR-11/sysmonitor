@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import ProgressBar from './utils/ProgressBar'
 
 
-const StatsCard = () => {
+const StatsCard = ({ className }) => {
 
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
@@ -26,7 +26,7 @@ const StatsCard = () => {
 
     useEffect(() => {
         fetchData(); // Initial fetch
-        const interval = setInterval(fetchData, 1000); // Fetch every 2 second
+        const interval = setInterval(fetchData, 1000); // Fetch every 1 second
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
@@ -71,7 +71,7 @@ const StatsCard = () => {
     };
 
     return (
-        <div className="select-none p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mx-auto w-fit mb-8 overflow-auto">
+        <div className={`${className} select-none p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto`}>
 
             <Link to='/cpu' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
                 <div className="flex items-center gap-2  mb-2">
@@ -84,7 +84,7 @@ const StatsCard = () => {
                     <Thermometer />
                     <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
                 </div>
-                <ProgressBar percent={data.cpu.temperature.toFixed(2)} suffix={'°C'}/>
+                <ProgressBar percent={data.cpu.temperature.toFixed(2)} suffix={'°C'} />
             </Link>
 
             <Link to='/memory' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
@@ -92,7 +92,7 @@ const StatsCard = () => {
                     <MemoryStick />
                     <span>Memory Used : <span className="font-bold">{formatBytes(data.memory.used)} / {formatBytes(data.memory.total)}</span></span>
                 </div>
-                <ProgressBar percent={((data.memory.used / data.memory.total) * 100).toFixed(2)} suffix={'%'}/>
+                <ProgressBar percent={((data.memory.used / data.memory.total) * 100).toFixed(2)} suffix={'%'} />
             </Link>
 
 
@@ -123,7 +123,18 @@ const StatsCard = () => {
             <div className='flex items-center gap-2'>
                 <div className="flex items-center gap-2">
                     <Calendar /> <Clock4 />
-                    <span>Current Date - time : <span className="font-bold">{new Date().toLocaleDateString()}</span></span>
+                    <span>Current Date - time : <span className="font-bold">{
+                        new Date()
+                            .toLocaleDateString(
+                                'en-US',
+                                {
+                                    weekday: "short",
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                }
+                            )
+                    }</span></span>
                 </div>
                 <div className="flex items-center gap-2 ">
                     <span><span className="font-bold">- {new Date().toLocaleTimeString()}</span></span>

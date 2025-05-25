@@ -1,14 +1,15 @@
 import React from "react";
-import WeatherCard from "../components/weather/WeatherCard";
+// import WeatherCard from "../components/weather/WeatherCard";
 import SmallWeatherCard from "../components/weather/SmallWeatherCard";
 import { CurrentWeatherCard, TodayHighlightCard } from "../components/playground/WeatherComponents";
-
+import WeatherCard from '../components/playground/WeatherCard'
+import weatherData from "../components/playground/mockData";
 
 const Playground = () => {
 
     return (
         <div className="border min-h-screen">
-            <div className="p-2">
+            {/* <div className="p-2">
                 Playground page try your component here!
             </div>
             <hr />
@@ -34,7 +35,9 @@ const Playground = () => {
             <div className="border m-2">
                 <CurrentWeatherCard/>
                 <TodayHighlightCard/>
-            </div>
+            </div> */}
+
+            <WeatherCard data={weatherData}/>
         </div>
     )
 }

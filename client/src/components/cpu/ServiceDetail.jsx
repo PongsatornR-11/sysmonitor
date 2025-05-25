@@ -47,37 +47,46 @@ export default function ServiceDetail() {
             </div>
         );
     }
-    console.log(data)
     return (
-        <div className="border">
-            <table className="mx-auto border">
-                <thead>
-                    <tr className="border">
-                        <th>Service</th>
-                        <th>Status</th>
-                        <th>PID</th>
-                        <th>CPU-load</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data.services.map((service, index) => {
-                            return (
-                                <tr key={index} >
-                                    <td className="border">{service.name}</td>
-                                    <td className="border">{service.running}</td>
-                                    {/* <td >{
-                                        service.pids.map((pid, index) => {
-                                            <span key={index} className="border">{pid.index}</span>
-                                        })
-                                    }</td> */}
-                                    <td className="border">{service.cpu.toFixed(2)}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </table>
-        </div>
+        <section>
+            <div className="mt-10">
+                <h1 className="text-xl font-bold m-4">Runing Service Details</h1>
+                <table className="mx-auto border border-collapse w-full text-sm text-left">
+                    <thead>
+                        <tr className="border">
+                            <th className="p-2 border">Service</th>
+                            <th className="p-2 border">Status</th>
+                            <th className="p-2 border">PID(s)</th>
+                            <th className="p-2 border">CPU Load (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.services.map((service, index) => (
+                            <tr key={index} className="hover:bg-opacity-50">
+                                <td className="p-2 border">{service.name}</td>
+                                <td className="p-2 border">
+                                    <span className={`px-2 py-1 rounded text-white ${service.running ? 'bg-green-500' : 'bg-red-500'} bg-opacity-50`}>
+                                        {service.running ? 'Running' : 'Stopped'}
+                                    </span>
+                                </td>
+                                <td className="p-2 border">
+                                    {service.pids.length > 0 ? (
+                                        service.pids.map((pidObj, i) => (
+                                            <span key={i} className="inline-block mr-1 px-2 py-0.5 border rounded">
+                                                {Object.values(pidObj)[0]}
+                                            </span>
+                                        ))
+                                    ) : (
+                                        <span className="text-gray-400">—</span>
+                                    )}
+                                </td>
+                                <td className="p-2 border">{service.cpu.toFixed(6)}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
     )
 }

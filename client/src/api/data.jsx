@@ -33,3 +33,7 @@ export const getMemoryData = async() => {
 export const getServicesData = async() =>{
     return await axios.get(`${API_BASE_URL}/service_data`)
 }
+
+export const getBasicOsData = async() =>{
+    return await axios.get(`${API_BASE_URL}/os_data`)
+}

@@ -279,3 +279,14 @@ exports.getMemoryData = async (req, res) => {
         throw error;
     }
 }
+
+exports.getBasicOsData = async (req, res) => {
+    try {
+        const osInfo = await (si.osInfo())
+        res.json({osInfo})
+    }
+    catch (error) {
+        console.error('Error getting Basic OS infomation', error)
+        throw error
+    }
+}

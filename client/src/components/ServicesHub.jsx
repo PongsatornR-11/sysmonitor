@@ -39,7 +39,7 @@ const ServicesHub = () => {
                             <Terminal className=' h-[100%]' />
                             <span className='flex h-[100%]  items-center'>SSH - Online</span>
                         </a>
-                        <a target='_blank' href='http://192.168.1.63:8080/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
+                        <a target='_blank' href='http://192.168.1.109:8080/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
                             <CloudDownload className=' h-[100%]' />
                             <span className='flex h-[100%] items-center'>q Bittorrent (local)</span>
                         </a>
@@ -60,7 +60,9 @@ const ServicesHub = () => {
                         <button
                             type='submit'
                             className='p-2 border rounded-md m-2 cursor-pointer hover:scale-105 duration-200'
-                        >Submit</button>
+                        >
+                            Submit
+                        </button>
                     </form>
                     :
                     <div className='flex justify-center gap-2 items-center'>

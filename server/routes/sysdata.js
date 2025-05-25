@@ -8,7 +8,8 @@ const {
     getDiskData,
     getServicesData,
     getNetworkConnections,
-    getMemoryData
+    getMemoryData,
+    getBasicOsData,
 } = require('../controllers/sysdata')
 
 
@@ -20,5 +21,6 @@ router.get('/disk_data', getDiskData)
 router.get('/connect_data', getNetworkConnections)
 router.get('/mem_data', getMemoryData)
 router.get('/service_data', getServicesData)
+router.get('/os_data', getBasicOsData)
 
 module.exports = router
