@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ProgressBar = ({ percent, suffix = '', fill = '#', total= '50' }) => {
+const ProgressBar = ({ percent, suffix = '', fill = '#', blank = '_', total= '50' }) => {
     //digit numbers
-    let totalDigits = 50; // changed to let since we modify it later
+    let totalDigits = total; // changed to let since we modify it later
     const percentDidits =
         percent < 10
             ? 3
@@ -22,7 +22,7 @@ const ProgressBar = ({ percent, suffix = '', fill = '#', total= '50' }) => {
     }
     //digit str
     const calProgress = fill.repeat(calProgressDigits + exceedFildigits);
-    const calBlankStr = '_'.repeat(calBlankDigit);
+    const calBlankStr = blank.repeat(calBlankDigit);
     const suffixUnit = suffix;
     const result = calProgress + calBlankStr + percent + suffixUnit;
 

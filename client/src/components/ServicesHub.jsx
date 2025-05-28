@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Code, FolderKey, HardDriveDownload, Terminal, CloudDownload } from 'lucide-react';
+import { Shield, Code, FolderKey, HardDriveDownload, Terminal, CloudDownload } from 'lucide-react';
 
 const ServicesHub = () => {
 
@@ -42,6 +42,10 @@ const ServicesHub = () => {
                         <a target='_blank' href='http://192.168.1.109:8080/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
                             <CloudDownload className=' h-[100%]' />
                             <span className='flex h-[100%] items-center'>q Bittorrent (local)</span>
+                        </a>
+                        <a target='_blank' href='http://192.168.1.109:5353/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
+                            <Shield className=' h-[100%]' />
+                            <span className='flex h-[100%] items-center'>Ad Guard Home (local)</span>
                         </a>
                     </div>
                     <button type='button' className='border p-1 rounded-md cursor-pointer hover:scale-105 duration-200 mt-4' onClick={() => { setStatus(null) }}> Hide services </button>

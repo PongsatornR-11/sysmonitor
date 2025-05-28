@@ -14,7 +14,6 @@ export const getCpuData = async() =>{
     return await axios.get(`${API_BASE_URL}/CPU_data`)
 }
 
-
 export const getNetworkData = async() =>{
     return await axios.get(`${API_BASE_URL}/network_data`)
 }
@@ -36,4 +35,8 @@ export const getServicesData = async() =>{
 
 export const getBasicOsData = async() =>{
     return await axios.get(`${API_BASE_URL}/os_data`)
+}
+
+export const getFansSpeed = async() =>{
+    return await axios.get(`${API_BASE_URL}/fans_speed`)
 }

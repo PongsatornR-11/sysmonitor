@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import LinkButton from "../components/button/LinkButton";
+import Footer from "../components/footer";
 
 const Layout = () => {
   return (
@@ -9,6 +10,7 @@ const Layout = () => {
       <main  className="font-mono">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { getServicesData } from '../../api/data'
+import CopyTextBox from "../utils/CopyTextBox";
 
 export default function ServiceDetail() {
 
@@ -49,44 +50,41 @@ export default function ServiceDetail() {
     }
     return (
         <section>
-            <div className="mt-10">
-                <h1 className="text-xl font-bold m-4">Runing Service Details</h1>
-                <table className="mx-auto border border-collapse w-full text-sm text-left">
-                    <thead>
-                        <tr className="border">
-                            <th className="p-2 border">Service</th>
-                            <th className="p-2 border">Status</th>
-                            <th className="p-2 border">PID(s)</th>
-                            <th className="p-2 border">CPU Load (%)</th>
+            <h1 className="text-xl font-bold m-4">Runing Service Details</h1>
+            <table className="mx-auto border border-collapse w-full text-sm text-left">
+                <thead>
+                    <tr className="border">
+                        <th className="p-2 border">Service</th>
+                        <th className="p-2 border">Status</th>
+                        <th className="p-2 border">PID(s)</th>
+                        <th className="p-2 border">CPU Load (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.services.map((service, index) => (
+                        <tr key={index} className="hover:bg-gray-400 cursor-pointer">
+                            <td className="p-2 border">{service.name}</td>
+                            <td className="p-2 border">
+                                <span className={`px-2 py-1 rounded text-white ${service.running ? 'bg-green-500' : 'bg-red-500'} bg-opacity-50`}>
+                                    {service.running ? 'Running' : 'Stopped'}
+                                </span>
+                            </td>
+                            <td className="p-2 border">
+                                {service.pids.length > 0 ? (
+                                    service.pids.map((pidObj, i) => (
+                                        <span key={i} className="inline-block mr-1 px-2 py-0.5 hover:scale-110">
+                                            <CopyTextBox textToCopy={Object.values(pidObj)[0]} />
+                                        </span>
+                                    ))
+                                ) : (
+                                    <span className="text-gray-400">—</span>
+                                )}
+                            </td>
+                            <td className="p-2 border">{service.cpu.toFixed(6)}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {data.services.map((service, index) => (
-                            <tr key={index} className="hover:bg-opacity-50">
-                                <td className="p-2 border">{service.name}</td>
-                                <td className="p-2 border">
-                                    <span className={`px-2 py-1 rounded text-white ${service.running ? 'bg-green-500' : 'bg-red-500'} bg-opacity-50`}>
-                                        {service.running ? 'Running' : 'Stopped'}
-                                    </span>
-                                </td>
-                                <td className="p-2 border">
-                                    {service.pids.length > 0 ? (
-                                        service.pids.map((pidObj, i) => (
-                                            <span key={i} className="inline-block mr-1 px-2 py-0.5 border rounded">
-                                                {Object.values(pidObj)[0]}
-                                            </span>
-                                        ))
-                                    ) : (
-                                        <span className="text-gray-400">—</span>
-                                    )}
-                                </td>
-                                <td className="p-2 border">{service.cpu.toFixed(6)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-            </div>
+                    ))}
+                </tbody>
+            </table>
         </section>
     )
 }

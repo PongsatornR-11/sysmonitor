@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" type="image/png" href="assets/house.png" />
       </Helmet>
 
-      <div className="select-none min-h-screen w-4xl mx-auto">
+      <div className="select-none min-h-screen w-fit mx-auto">
         {/* Header */}
         <div className="mb-6 w-fit mx-auto">
           <div className='flex items-center'>

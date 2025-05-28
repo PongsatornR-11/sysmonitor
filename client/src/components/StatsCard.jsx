@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getSystemBasicData } from '../api/data';
+import { getSystemBasicData, getFansSpeed } from '../api/data';
 import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4, Calendar, ClockArrowUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ProgressBar from './utils/ProgressBar'
@@ -15,7 +15,8 @@ const StatsCard = ({ className }) => {
     const fetchData = async () => {
         try {
             const res = await getSystemBasicData();
-            setData(res.data);
+            const fansRes = await getFansSpeed();
+            setData({...res.data, fansRes:fansRes.data});
             setError(null);
         } catch (err) {
             setError(`Failed to fetch system data: ${err.message}`);
@@ -69,25 +70,30 @@ const StatsCard = ({ className }) => {
         const s = Math.floor(seconds % 60);
         return `${d}d ${h}h ${m}m ${s}s`;
     };
-
+    
     return (
-        <div className={`${className} select-none p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto`}>
+        <div className={`${className} select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto`}>
 
-            <Link to='/cpu' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
-                <div className="flex items-center gap-2  mb-2">
+            <Link to='/cpu' className='items-center gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
+                <div className="flex items-center gap-2">
                     <Cpu />
                     <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)} %</span></span>
                 </div>
-                <ProgressBar percent={data.cpu.load.toFixed(2)} suffix={'%'} />
+                <ProgressBar percent={data.cpu.load.toFixed(2)} suffix={'%'} total={50} />
 
                 <div className="flex items-center gap-2 ">
                     <Thermometer />
                     <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
                 </div>
                 <ProgressBar percent={data.cpu.temperature.toFixed(2)} suffix={'°C'} />
+
+                <div className="flex items-center gap-2 ">
+                    <span>Fans Speed : <span className="font-bold">{data.fansRes.rpm} RPM / 8000 RPM</span></span>
+                </div>
+                <ProgressBar percent={(data.fansRes.rpm/8000 * 100).toFixed(2)} suffix={'%'} />
             </Link>
 
-            <Link to='/memory' className='items-center text-lg gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
+            <Link to='/memory' className='items-center gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
                 <div className="flex items-center gap-2">
                     <MemoryStick />
                     <span>Memory Used : <span className="font-bold">{formatBytes(data.memory.used)} / {formatBytes(data.memory.total)}</span></span>
@@ -95,9 +101,7 @@ const StatsCard = ({ className }) => {
                 <ProgressBar percent={((data.memory.used / data.memory.total) * 100).toFixed(2)} suffix={'%'} />
             </Link>
 
-
-
-            <Link to='/disk' className=" text-lg hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl">
+            <Link to='/disk' className=" hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl">
                 <div className='flex items-center gap-2 text-lg'>
 
                     <HardDrive />
@@ -110,17 +114,20 @@ const StatsCard = ({ className }) => {
 
             </Link>
 
-            <Link to='/network' className="flex items-center gap-2 text-lg hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl">
+            <Link to='/network' className="flex items-center gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl">
                 <Network />
                 <span>IP Address : <span className="font-bold">{data.network.interfaces[1].ip4}</span></span>
             </Link>
-            <div className="flex items-center gap-2 text-lg ">
+
+            <div className="flex items-center gap-2 ">
                 <ClockArrowUp />
                 <span>Up-Time : <span className="font-bold">{formatTime(data.uptime)}</span></span>
             </div>
+
+
             <hr />
 
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center text-sm gap-2'>
                 <div className="flex items-center gap-2">
                     <Calendar /> <Clock4 />
                     <span>Current Date - time : <span className="font-bold">{

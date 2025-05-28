@@ -1,4 +1,5 @@
 const si = require('systeminformation');
+const fs = require('fs').promises;
 
 exports.getSystemData = async (req, res) => {
     try {
@@ -283,10 +284,22 @@ exports.getMemoryData = async (req, res) => {
 exports.getBasicOsData = async (req, res) => {
     try {
         const osInfo = await (si.osInfo())
-        res.json({osInfo})
+        res.json({ osInfo })
     }
     catch (error) {
         console.error('Error getting Basic OS infomation', error)
+        throw error
+    }
+}
+
+exports.getFansSpeed = async (req, res) => {
+    try {
+        const fanSpeedPath = '/sys/devices/platform/cooling_fan/hwmon/hwmon2/fan1_input';
+        const fanSpeed = await fs.readFile(fanSpeedPath, 'utf8');
+        const rpm = parseInt(fanSpeed, 10);
+        res.json({ rpm });
+    } catch (error) {
+        console.error('Error getting Fans Speed', error)
         throw error
     }
 }
