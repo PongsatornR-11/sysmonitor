@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getSystemBasicData, getFansSpeed } from '../api/data';
-import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4, Calendar, ClockArrowUp } from 'lucide-react'
+import { getSystemBasicData, getFansSpeed, getNetworkData } from '../api/data';
+import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4, Calendar, ClockArrowUp, Fan } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ProgressBar from './utils/ProgressBar'
 
@@ -16,7 +16,8 @@ const StatsCard = ({ className }) => {
         try {
             const res = await getSystemBasicData();
             const fansRes = await getFansSpeed();
-            setData({...res.data, fansRes:fansRes.data});
+            const networkRes = await getNetworkData();
+            setData({ ...res.data, fansRes: fansRes.data, networkRes: networkRes.data });
             setError(null);
         } catch (err) {
             setError(`Failed to fetch system data: ${err.message}`);
@@ -70,7 +71,7 @@ const StatsCard = ({ className }) => {
         const s = Math.floor(seconds % 60);
         return `${d}d ${h}h ${m}m ${s}s`;
     };
-    
+    console.log(data)
     return (
         <div className={`${className} select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto`}>
 
@@ -88,9 +89,10 @@ const StatsCard = ({ className }) => {
                 <ProgressBar percent={data.cpu.temperature.toFixed(2)} suffix={'°C'} />
 
                 <div className="flex items-center gap-2 ">
+                    <Fan className='animate-spin'/>
                     <span>Fans Speed : <span className="font-bold">{data.fansRes.rpm} RPM / 8000 RPM</span></span>
                 </div>
-                <ProgressBar percent={(data.fansRes.rpm/8000 * 100).toFixed(2)} suffix={'%'} />
+                <ProgressBar percent={(data.fansRes.rpm / 8000 * 100).toFixed(2)} suffix={'%'} />
             </Link>
 
             <Link to='/memory' className='items-center gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
@@ -116,14 +118,14 @@ const StatsCard = ({ className }) => {
 
             <Link to='/network' className="flex items-center gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl">
                 <Network />
-                <span>IP Address : <span className="font-bold">{data.network.interfaces[1].ip4}</span></span>
+                <span>IP Address : <span className="font-bold">{data.network.interfaces[1].ip4}</span> ({data.network.interfaces[1].iface})</span>
+
             </Link>
 
             <div className="flex items-center gap-2 ">
                 <ClockArrowUp />
                 <span>Up-Time : <span className="font-bold">{formatTime(data.uptime)}</span></span>
             </div>
-
 
             <hr />
 

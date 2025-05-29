@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Shield, Code, FolderKey, HardDriveDownload, Terminal, CloudDownload } from 'lucide-react';
 
-const ServicesHub = () => {
+const ServicesHub = ({ className }) => {
 
     const [input, setInput] = useState('')
     const [status, setStatus] = useState(null)
@@ -17,7 +17,7 @@ const ServicesHub = () => {
         setInput('')
     }
     return (
-        <div className='m-6 p-4 border-2 rounded-2xl w-fit mx-auto mb-8'>
+        <div className={`${className} m-6 p-4 border-2 rounded-2xl w-fit mb-8`}>
             <h1 className='p-2 mb-2 text-xl font-bold'>My Pi Services</h1>
             {status == true
                 ?
