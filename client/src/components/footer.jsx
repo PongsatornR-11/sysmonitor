@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="text-foreground py-8 mt-auto border-t">
+    <footer className="text-foreground py-8 mt-auto border-t ">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
@@ -19,10 +19,11 @@ const Footer = () => {
               <li><a href="/cpu" className="text-muted-foreground hover:text-primary transition-colors">CPU</a></li>
               <li><a href="/memory" className="text-muted-foreground hover:text-primary transition-colors">Memory</a></li>
               <li><a href="/network" className="text-muted-foreground hover:text-primary transition-colors">Network</a></li>
+              <li><a href="/os" className="text-muted-foreground hover:text-primary transition-colors">Operating System</a></li>
             </ul>
           </div>
           <div className="space-y-4">
-            <h4 className="text-primary text-lg font-semibold">Contact</h4>
+            <h4 className="text-primary text-lg font-semibold">Contact Me</h4>
             <div className='flex gap-4'>
               <p className="text-muted-foreground flex items-center gap-2">
                 <a href="mailto:pongsatorn.rk@gmail.com" target='_blank'><Mail />

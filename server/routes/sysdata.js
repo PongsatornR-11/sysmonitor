@@ -11,6 +11,7 @@ const {
     getMemoryData,
     getBasicOsData,
     getFansSpeed,
+    getOSVersionsData,
 } = require('../controllers/sysdata')
 
 
@@ -24,5 +25,6 @@ router.get('/mem_data', getMemoryData)
 router.get('/service_data', getServicesData)
 router.get('/os_data', getBasicOsData)
 router.get('/fans_speed', getFansSpeed)
+router.get('/os_version', getOSVersionsData)
 
 module.exports = router

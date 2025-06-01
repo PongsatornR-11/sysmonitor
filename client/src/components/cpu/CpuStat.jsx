@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getCpuData } from '../../api/data'
-import { Thermometer, Cpu } from 'lucide-react'
+import { getCpuData, getFansSpeed } from '../../api/data'
+import { Thermometer, Cpu, Fan } from 'lucide-react'
 import CpuCharts from '../CpuCharts';
 import ProgressBar from '../utils/ProgressBar';
 
@@ -14,7 +14,8 @@ const CpuStat = () => {
     const fetchData = async () => {
         try {
             const res = await getCpuData();
-            setData(res.data);
+            const fansRes = await getFansSpeed();
+            setData({ ...res.data, fansRes: fansRes.data });
             setError(null);
         } catch (err) {
             setError(`Failed to fetch system data: ${err.message}`);
@@ -54,13 +55,13 @@ const CpuStat = () => {
     }
 
     return (
-        <div className="min-h-screen w-fit mx-auto">
-            <div className="flex items-center justify-center mb-6">
-                <h1 className="text-2xl font-extrabold tracking-tight">CPU Status</h1>
+        <div className="w-fit mx-auto">
+            <div className="flex items-center justify-center m-6">
+                <h1 className="text-xl font-extrabold tracking-tight">CPU Status</h1>
             </div>
 
-            <div className="p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
-                <div className="items-center gap-2 rounded-2xl text-lg">
+            <div className="select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto mx-auto">
+                <div className="items-center gap-2 rounded-2xl">
                     <div className='flex gap-2'>
                         <Cpu />
                         <span>CPU Load : <span className="font-bold">{data.cpu.load.toFixed(2)}%</span></span>
@@ -68,20 +69,26 @@ const CpuStat = () => {
                     <ProgressBar percent={data.cpu.load.toFixed(2)} suffix={'%'} />
                 </div>
 
-                <div className="items-center gap-2 rounded-2xl text-lg ">
+                <div className="items-center gap-2 rounded-2xl ">
                     <div className='flex gap-2'>
                         <Thermometer />
                         <span>CPU Temp : <span className="font-bold">{data.cpu.temperature.toFixed(2)} °C</span></span>
                     </div>
                     <ProgressBar percent={data.cpu.temperature} suffix={'°C'} />
                 </div>
+                <div className="flex items-center gap-2 ">
+                    <Fan />
+                    <span>Fans Speed : <span className="font-bold">{data.fansRes.rpm} RPM / 8000 RPM</span></span>
+                </div>
+                <ProgressBar percent={(data.fansRes.rpm / 8000 * 100).toFixed(2)} suffix={'%'} />
             </div>
-            <div className="p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
+
+            <div className="select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto mx-auto">
                 {
                     data.cpu.cores.map((core, index) => {
                         return (
                             <div>
-                                <div key={index} className="items-center rounded-2xl text-lg gap-2">
+                                <div key={index} className="items-center rounded-2xl gap-2">
                                     <span className='flex gap-2 '><Cpu />Load core {index} :<span className='font-bold'> {core.load.toFixed(2)} %</span> </span>
                                     <ProgressBar percent={core.load.toFixed(2)} suffix={'%'} />
                                 </div>

@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { AlignJustify, House, Cpu, MemoryStick, HardDrive, Network } from 'lucide-react';
+import { AlignJustify, House, Cpu, MemoryStick, HardDrive, Network, MonitorCog } from 'lucide-react';
 
 const DropdownButton = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const links = [
-        { name: <House />, href: '/' },
-        { name: <Cpu />, href: '/cpu' },
-        { name: <MemoryStick />, href: '/memory' },
-        { name: <HardDrive />, href: '/disk' },
-        { name: <Network />, href: '/network' },
+        { Icon: <House />, href: '/', name: 'Home' },
+        { Icon: <Cpu />, href: '/cpu', name: 'CPU' },
+        { Icon: <MemoryStick />, href: '/memory', name: 'Memory' },
+        { Icon: <HardDrive />, href: '/disk', name: 'Disk' },
+        { Icon: <Network />, href: '/network', name: 'Network' },
+        { Icon: <MonitorCog />, href: '/os', name: 'OS' },
     ];
 
     return (
-        <div className="home-page inline-block text-left border p-3 rounded-md cursor-pointer" style={{ backgroundColor: 'var(--background-color)', color: 'var(--text-color)' }}>
+        <div className="home-page text-left border py-2 px-2 rounded-md cursor-pointer" style={{ backgroundColor: 'var(--background-color)', color: 'var(--text-color)' }}>
             <button
                 type="button"
-                className="inline-flex w-full justify-center"
-                id="options-menu"
-                aria-haspopup="true"
-                aria-expanded="true"
+                className="inline-flex w-full justify-center cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <AlignJustify />
@@ -40,7 +38,10 @@ const DropdownButton = () => {
                                 className="block p-2 text-sm transition delay-100 duration-300 hover:scale-105 hover:border rounded-md"
                                 role="menuitem"
                             >
-                                {link.name}
+                                <div className='flex items-center gap-2'>
+                                    {link.Icon}
+                                    {link.name}
+                                </div>
                             </a>
                         ))}
                     </div>

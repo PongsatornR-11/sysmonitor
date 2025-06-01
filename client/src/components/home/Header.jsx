@@ -5,7 +5,7 @@ import Blinking from '../utils/Blinking'
 
 const Header = ({ className }) => {
     return (
-        <div className={`${className} m-6 w-fit `}>
+        <div className={`${className} m-6 w-fit`}>
             <div className='flex items-center'>
                 <FaRaspberryPi className="flex items-center text-4xl font-bold mr-3" />
                 <h1 className="flex items-center text-2xl font-extrabold tracking-tight">Raspberry Pi Monitor</h1>

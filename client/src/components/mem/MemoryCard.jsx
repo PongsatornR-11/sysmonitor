@@ -58,25 +58,25 @@ const MemoryCard = () => {
   };
   return (
     <div className="text-lg rounded-2xl flex flex-col gap-2 w-fit mx-auto mb-8">
-      <h1 className="text-2xl font-bold mt-8 mb-4">Memory Stats</h1>
+      <h1 className="text-xl font-bold mt-8 mb-4 mx-auto">Memory Stats</h1>
 
-      <div className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
-        <p className="text-xl font-semibold ">Used Memory: {formatBytes(data.memory.actualUsedMemory)}</p>
-        <p className="text-xl font-semibold ">Total Memory: {formatBytes(data.memory.total)}</p>
-        <p className="text-xl font-semibold ">Free Memory: {formatBytes(data.memory.available)}</p>
-        <div className='border rounded-2xl p-2'>
-          <p className="text-xl font-semibold ">Memory Usage: {data.memory.actualusedPercentage.toFixed(2)}%</p>
+      <div className='select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto'>
+        <p className="font-semibold ">Used Memory: {formatBytes(data.memory.actualUsedMemory)}</p>
+        <p className="font-semibold ">Total Memory: {formatBytes(data.memory.total)}</p>
+        <p className="font-semibold ">Free Memory: {formatBytes(data.memory.available)}</p>
+        <p className="font-semibold ">Memory Speed: {data.memoryLayout[0].clockSpeed} MHz</p>
+        <div className='py-2'>
+          <p className="font-semibold ">Memory Usage: {data.memory.actualusedPercentage.toFixed(2)}%</p>
           <ProgressBar percent={data.memory.actualusedPercentage.toFixed(2)} suffix={'%'} />
         </div>
-        <p className="text-xl font-semibold ">Memory Speed: {data.memoryLayout[0].clockSpeed} MHz</p>
       </div>
 
-      <div className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
-        <p className="text-xl font-semibold ">Type Memory: {data.memoryLayout[0].type}</p>
-        <p className="text-xl font-semibold ">Config Voltage: {data.memoryLayout[0].voltageConfigured} V</p>
-        <p className="text-xl font-semibold ">Max Voltage: {data.memoryLayout[0].voltageMax} V</p>
-        <div className='border rounded-2xl p-2'>
-          <p className="text-xl font-semibold ">Min Voltage: {data.memoryLayout[0].voltageMin} V</p>
+      <div className='select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto'>
+        <p className="font-semibold ">Type Memory: {data.memoryLayout[0].type}</p>
+        <p className="font-semibold ">Config Voltage: {data.memoryLayout[0].voltageConfigured} V</p>
+        <p className="font-semibold ">Max Voltage: {data.memoryLayout[0].voltageMax} V</p>
+        <div className='py-2'>
+          <p className="font-semibold ">Min Voltage: {data.memoryLayout[0].voltageMin} V</p>
           <ProgressBar percent={(data.memoryLayout[0].voltageMax / data.memoryLayout[0].voltageMin * 100).toFixed(2)} suffix={'%'} />
         </div>
       </div>

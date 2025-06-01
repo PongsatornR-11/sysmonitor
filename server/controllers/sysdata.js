@@ -303,3 +303,12 @@ exports.getFansSpeed = async (req, res) => {
         throw error
     }
 }
+
+exports.getOSVersionsData = async(req,res)=>{
+    try{
+        const osVersions = await (si.versions())
+        res.json({osVersions})
+    } catch (error){
+
+    }
+}

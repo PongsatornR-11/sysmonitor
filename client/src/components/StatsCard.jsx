@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getSystemBasicData, getFansSpeed, getNetworkData } from '../api/data';
-import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4, Calendar, ClockArrowUp, Fan } from 'lucide-react'
+import { getSystemBasicData, getFansSpeed, getNetworkData, getOSInfo } from '../api/data';
+import { Cpu, Thermometer, HardDrive, MemoryStick, Network, Clock4, Calendar, ClockArrowUp, Fan, MonitorCog } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ProgressBar from './utils/ProgressBar'
 
@@ -17,7 +17,8 @@ const StatsCard = ({ className }) => {
             const res = await getSystemBasicData();
             const fansRes = await getFansSpeed();
             const networkRes = await getNetworkData();
-            setData({ ...res.data, fansRes: fansRes.data, networkRes: networkRes.data });
+            const OSInfoRes = await getOSInfo();
+            setData({ ...res.data, fansRes: fansRes.data, networkRes: networkRes.data, OSInfoRes: OSInfoRes.data });
             setError(null);
         } catch (err) {
             setError(`Failed to fetch system data: ${err.message}`);
@@ -71,7 +72,7 @@ const StatsCard = ({ className }) => {
         const s = Math.floor(seconds % 60);
         return `${d}d ${h}h ${m}m ${s}s`;
     };
-    console.log(data)
+
     return (
         <div className={`${className} select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto`}>
 
@@ -89,7 +90,7 @@ const StatsCard = ({ className }) => {
                 <ProgressBar percent={data.cpu.temperature.toFixed(2)} suffix={'°C'} />
 
                 <div className="flex items-center gap-2 ">
-                    <Fan className='animate-spin'/>
+                    <Fan />
                     <span>Fans Speed : <span className="font-bold">{data.fansRes.rpm} RPM / 8000 RPM</span></span>
                 </div>
                 <ProgressBar percent={(data.fansRes.rpm / 8000 * 100).toFixed(2)} suffix={'%'} />
@@ -122,6 +123,16 @@ const StatsCard = ({ className }) => {
 
             </Link>
 
+            <Link to='/os' className='flex items-center gap-2 hover:scale-105 duration-200 hover:p-2 hover:border rounded-xl'>
+                <MonitorCog />
+                <div className='flex'>
+                    <p>OS :
+                        <span className='font-bold'> {data.OSInfoRes.osInfo.distro}</span>
+                        <span> (Architecture :<span className='font-bold'> {data.OSInfoRes.osInfo.arch})</span></span>
+                    </p>
+                </div>
+            </Link>
+
             <div className="flex items-center gap-2 ">
                 <ClockArrowUp />
                 <span>Up-Time : <span className="font-bold">{formatTime(data.uptime)}</span></span>
@@ -132,18 +143,20 @@ const StatsCard = ({ className }) => {
             <div className='flex items-center text-sm gap-2'>
                 <div className="flex items-center gap-2">
                     <Calendar /> <Clock4 />
-                    <span>Current Date - time : <span className="font-bold">{
-                        new Date()
-                            .toLocaleDateString(
-                                'en-US',
-                                {
-                                    weekday: "short",
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                }
-                            )
-                    }</span></span>
+                    <span className="font-bold">
+                        {
+                            new Date()
+                                .toLocaleDateString(
+                                    'en-US',
+                                    {
+                                        weekday: "short",
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    }
+                                )
+                        }
+                    </span>
                 </div>
                 <div className="flex items-center gap-2 ">
                     <span><span className="font-bold">- {new Date().toLocaleTimeString()}</span></span>

@@ -54,8 +54,8 @@ const networkDetail = () => {
 
     return (
         <div>
-            <div className="text-lg rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
-                <h1 className="text-2xl font-bold mb-4 ">Network Interfaces</h1>
+            <div className="rounded-2xl shadow-md flex flex-col gap-2 max-w-xl mx-auto mb-8">
+                <h1 className="text-xl font-bold mb-4 mx-auto">Network Interfaces</h1>
                 {data.interfaces.map((item) => (
                     <div key={item.iface} className="mb-6 border p-4 rounded-2xl shadow">
                         <h2 className="text-xl font-semibold">Iface: {item.iface}</h2>

@@ -16,39 +16,54 @@ const ServicesHub = ({ className }) => {
         }
         setInput('')
     }
+
+    const services = [
+        {
+            url: 'https://code.mypiserviceshub.com/',
+            name: 'Code - server',
+            icon: <Code className=' h-[100%]' />
+        },
+        {
+            url: 'https://file.mypiserviceshub.com/',
+            name: 'File - Browser',
+            icon: <FolderKey className=' h-[100%]' />
+        },
+        {
+            url: 'https://vault.mypiserviceshub.com/',
+            name: 'Open Media Vault',
+            icon: <HardDriveDownload className=' h-[100%]' />
+        },
+        {
+            url: 'https://ssh.mypiserviceshub.com/',
+            name: 'SSH - Online',
+            icon: <Terminal className=' h-[100%]' />
+        },
+        {
+            url: 'https://bittorrent.mypiserviceshub.com/',
+            name: 'q Bittorrent',
+            icon: <CloudDownload className=' h-[100%]' />
+        },
+        {
+            url: 'https://adguard.mypiserviceshub.com/',
+            name: 'Ad Guard Home',
+            icon: <Shield className=' h-[100%]' />
+        }
+    ]
     return (
-        <div className={`${className} m-6 p-4 border-2 rounded-2xl w-fit mb-8`}>
-            <h1 className='p-2 mb-2 text-xl font-bold'>My Pi Services</h1>
+        <div className={`${className} m-6 p-4 border-2 rounded-2xl w-fit`}>
+            <h1 className='p-2 mb-2 text-lg font-bold'>My Pi Services</h1>
             {status == true
                 ?
                 (<div>
-                    <div class="grid grid-cols-4 gap-4">
-                        <a target='_blank' href='https://code.mypiserviceshub.com/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
-                            <Code className=' h-[100%]' />
-                            <span className='flex h-[100%] items-center'> Code - server</span>
-                        </a>
-                        <a target='_blank' href='https://file.mypiserviceshub.com/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
-                            <FolderKey className=' h-[100%]' />
-                            <span className='flex h-[100%]  items-center'>File - Browser</span>
-                        </a>
-                        <a target='_blank' href='https://vault.mypiserviceshub.com/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
-                            <HardDriveDownload className=' h-[100%]' />
-                            <span className='flex h-[100%]  items-center'>Open Media Vault</span>
-                        </a>
-                        <a target='_blank' href='https://ssh.mypiserviceshub.com/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
-                            <Terminal className=' h-[100%]' />
-                            <span className='flex h-[100%]  items-center'>SSH - Online</span>
-                        </a>
-                        <a target='_blank' href='http://192.168.1.109:8080/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
-                            <CloudDownload className=' h-[100%]' />
-                            <span className='flex h-[100%] items-center'>q Bittorrent (local)</span>
-                        </a>
-                        <a target='_blank' href='http://192.168.1.109:5353/' className=' flex justify-evenly border rounded-md p-2 hover:scale-105 duration-200'>
-                            <Shield className=' h-[100%]' />
-                            <span className='flex h-[100%] items-center'>Ad Guard Home (local)</span>
-                        </a>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {services.map((service) => (
+                            <a target='_blank' href={service.url} className=' flex justify-between gap-2 border rounded-md py-1 px-2 hover:scale-105 duration-200'>
+                                {service.icon}
+                                <span className='flex h-[100%] items-center mx-auto'> {service.name}</span>
+                            </a>
+                        ))}
                     </div>
-                    <button type='button' className='border p-1 rounded-md cursor-pointer hover:scale-105 duration-200 mt-4' onClick={() => { setStatus(null) }}> Hide services </button>
+                    <button type='button' className='border text-sm p-2 rounded-md cursor-pointer hover:scale-105 duration-200 mt-4' onClick={() => { setStatus(null) }}> Hide service </button>
                 </div>)
                 :
                 status == null

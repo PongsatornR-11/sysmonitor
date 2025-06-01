@@ -15,11 +15,11 @@ export default function Home() {
         <link rel="icon" type="image/png" href="assets/house.png" />
       </Helmet>
 
-      <div className="select-none min-h-screen w-fit mx-auto">
+      <div className="select-none w-fit mx-auto">
         <Header className={'mx-auto'}/>
         <StatsCard className={'mx-auto'} />
-        <ServicesHub className={'mx-auto'}/>
         <LiveStats className={'mx-auto'}/>
+        <ServicesHub className={'mx-auto'}/>
       </div>
     </div>
   );

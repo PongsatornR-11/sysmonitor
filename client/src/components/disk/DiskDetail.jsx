@@ -56,9 +56,9 @@ const DiskDetail = () => {
     }
     return (
         <div>
-            <div className="text-lg rounded-2xl flex flex-col gap-2 max-w-xl mx-auto mb-8">
+            <div className="rounded-2xl flex flex-col gap-2 max-w-xl mx-auto mb-8">
 
-                <h1 className="text-2xl font-bold mt-8 mb-4">Disk Stats</h1>
+                <h1 className="text-xl font-bold mt-8 mb-4 mx-auto">Disk Stats</h1>
                 {data.disk.map((disk) => {
                     if (disk.fs == '/dev/sdb1') {
                         return (
@@ -70,10 +70,10 @@ const DiskDetail = () => {
                             //     <div>Disk Used: <span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>
                             //     <ProgressBar percent={disk.usedPercentage.toFixed(2)} suffix={'%'}/>
                             // </a>
-                            <div target="_blank" className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
+                            <div target="_blank" className='mx-auto select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto'>
                                 <div>Disk name: {disk.fs}</div>
                                 <div>Disk path:
-                                    <CopyTextBox textToCopy={disk.mount} />
+                                    <CopyTextBox textToCopy={disk.mount} textToShow={disk.mount} />
                                 </div>
                                 <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div>
                                 <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
@@ -83,9 +83,9 @@ const DiskDetail = () => {
                         )
                     }
                     return (
-                        <div className='p-6 border-2 rounded-2xl shadow-md flex flex-col gap-2 mb-8'>
+                        <div className='mx-auto select-none p-4 border-2 rounded-2xl shadow-md flex flex-col gap-2 w-fit mb-8 overflow-auto'>
                             <div>Disk name: {disk.fs}</div>
-                            <div>Disk path: <CopyTextBox textToCopy={disk.mount}/></div>
+                            <div>Disk path: <CopyTextBox textToCopy={disk.mount} textToShow={disk.mount} /></div>
                             <div>Disk Size: <span className='font-bold'>{convertDataSize(disk.used)} / {convertDataSize(disk.size)}</span></div>
                             <div>Disk Available: <span className='font-bold'>{convertDataSize(disk.available)}</span></div>
                             <div>Disk Used: <span className='font-bold'>{disk.usedPercentage.toFixed(2)}</span> %</div>

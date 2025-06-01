@@ -6,10 +6,8 @@ import ThemeToggle from './components/ThemeToggle'
 function App() {
   return (
     <ThemeProvider>
-      <div style={{ backgroundColor: 'var(--background-color)', color: 'var(--text-color)' }}>
         <ThemeToggle />
         <AppRoutes />
-      </div>
     </ThemeProvider>
   )
 }

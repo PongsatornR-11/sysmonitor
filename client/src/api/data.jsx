@@ -40,3 +40,7 @@ export const getBasicOsData = async() =>{
 export const getFansSpeed = async() =>{
     return await axios.get(`${API_BASE_URL}/fans_speed`)
 }
+
+export const getOSInfo = async() =>{
+    return await axios.get(`${API_BASE_URL}/os_data`)
+}
