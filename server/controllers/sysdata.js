@@ -294,7 +294,18 @@ exports.getBasicOsData = async (req, res) => {
 
 exports.getFansSpeed = async (req, res) => {
     try {
-        const fanSpeedPath = '/sys/devices/platform/cooling_fan/hwmon/hwmon2/fan1_input';
+        // Use a wildcard to find the hwmon directory
+        const baseFanPath = '/sys/devices/platform/cooling_fan/hwmon/';
+
+        // Find all directories matching hwmonX
+        const hwmonDirs = await fs.readdir(baseFanPath);
+        const targetHwmonDir = hwmonDirs.find(dir => dir.startsWith('hwmon'));
+
+        if (!targetHwmonDir) {
+            throw new Error('No hwmon directory found for cooling_fan.');
+        }
+
+        const fanSpeedPath = `${baseFanPath}${targetHwmonDir}/fan1_input`;
         const fanSpeed = await fs.readFile(fanSpeedPath, 'utf8');
         const rpm = parseInt(fanSpeed, 10);
         res.json({ rpm });
@@ -304,11 +315,11 @@ exports.getFansSpeed = async (req, res) => {
     }
 }
 
-exports.getOSVersionsData = async(req,res)=>{
-    try{
+exports.getOSVersionsData = async (req, res) => {
+    try {
         const osVersions = await (si.versions())
-        res.json({osVersions})
-    } catch (error){
+        res.json({ osVersions })
+    } catch (error) {
 
     }
 }
