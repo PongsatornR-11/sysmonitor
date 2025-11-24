@@ -3,7 +3,7 @@ import React from 'react'
 const ProjectCard = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-900">
-            <div className="relative group w-[600px]">
+            {/* <div className="relative group w-[600px]">
                 <img
                     src="./foster-lake.jpg" // Replace with your actual image path
                     alt="Halcyon Theme"
@@ -14,7 +14,8 @@ const ProjectCard = () => {
                     <h2 className="text-xl mb-1">Halcyon Theme</h2>
                     <p className="text-sm">A minimal dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more.</p>
                 </div>
-            </div>
+            </div> */}
+
         </div>
 
     )

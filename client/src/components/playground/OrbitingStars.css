@@ -1,0 +1,92 @@
+.stars-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.central-body {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 50px #fff;
+  position: absolute;
+}
+
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: orbit-spin 10s linear infinite;
+}
+
+.star {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-1 {
+  width: 100px;
+  height: 100px;
+  animation-duration: 8s;
+}
+
+.orbit-2 {
+  width: 200px;
+  height: 200px;
+  animation-duration: 12s;
+  animation-direction: reverse;
+}
+
+.orbit-3 {
+  width: 300px;
+  height: 300px;
+  animation-duration: 16s;
+}
+
+.orbit-4 {
+  width: 400px;
+  height: 400px;
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+
+.star-1 {
+  left: 100%;
+}
+
+.star-2 {
+  top: 0;
+  left: 50%;
+}
+
+.star-3 {
+  top: 50%;
+  left: 0%;
+}
+
+.star-4 {
+    top: 100%;
+    left: 50%;
+}
+
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

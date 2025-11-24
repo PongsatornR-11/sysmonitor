@@ -1,0 +1,75 @@
+/* styles.css or global.css */
+
+/* Define the Rainbow Gradient Animation Keyframes */
+@keyframes rainbow-spin {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Style for the pseudo-element inside the button */
+.rainbow-border-anim {
+    /* Use ::before or ::after in a real component for better separation, 
+     but using a class for simplicity here */
+
+    /* Initial state: invisible */
+    opacity: 0;
+
+    /* The large, repeating rainbow gradient background */
+    background: conic-gradient(from 180deg at 50% 50%,
+            #ff0000,
+            /* Red */
+            #ffa500,
+            /* Orange */
+            #ffff00,
+            /* Yellow */
+            #008000,
+            /* Green */
+            #0000ff,
+            /* Blue */
+            #4b0082,
+            /* Indigo */
+            #8f00ff,
+            /* Violet */
+            #ff0000
+            /* Red (to loop the gradient) */
+        );
+
+    /* Background size must be large to allow for movement */
+    background-size: 400% 400%;
+
+    /* Transition for opacity */
+    transition: opacity 0.3s ease-in-out;
+
+    /* Apply the animation, paused initially */
+    animation: rainbow-spin 4s linear infinite paused;
+
+    /* Make it round like the parent button */
+    border-radius: 0.5rem;
+    /* Matches rounded-lg */
+}
+
+/* Hover/Focus/Active State: make the gradient visible and start animation */
+.group:hover .rainbow-border-anim,
+.group:focus .rainbow-border-anim,
+.group:active .rainbow-border-anim {
+    opacity: 1;
+    /* Make visible */
+    animation-play-state: running;
+    /* Start the animation */
+    /* Make the inner span transparent on hover/press 
+     to show the rainbow pseudo-element as the button background */
+    background-color: transparent;
+}
+
+/* Make sure the inner span's background is transparent 
+   so the pseudo-element is visible on hover/press */
+.group:hover .relative,
+.group:focus .relative,
+.group:active .relative {
+    background-color: transparent !important;
+}
